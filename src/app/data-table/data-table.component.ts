@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatTableDataSource, MatSort} from '@angular/material';
+import { Component, OnInit , ViewChild} from '@angular/core';
+
+import {MatTableDataSource, MatSort, MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 
 export interface Element {
   waiter: string;
@@ -18,13 +19,18 @@ const ELEMENT_DATA: Element[] = [
 ];
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-data-table',
+  templateUrl: './data-table.component.html',
+  styleUrls: ['./data-table.component.css']
 })
-export class AppComponent implements OnInit {
+export class DataTableComponent implements OnInit {
+  displayedColumns = ['table', 'waiter', 'drink', 'ready', 'delivered'];
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
+
+  @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
-    console.log('log app.component.ts on init');
+    this.dataSource.sort = this.sort;
   }
+
 }
